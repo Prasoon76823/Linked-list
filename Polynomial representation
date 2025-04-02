@@ -1,0 +1,56 @@
+#include <iostream>
+#include<cmath>
+using namespace std;
+class node
+{
+    public:
+    int coff;
+    int expo;
+    node *next;
+    node(int value1,int value2)
+    {
+        coff=value1;
+        expo=value2;
+        next=NULL;
+    }
+};
+int main()
+{
+    int n,coff,expo;
+    node *head=NULL;
+    node *tail=NULL;
+    
+    cout<<"Enter size: ";
+    cin>>n;
+    for(int i=0;i<n;i++)
+    {
+        cout<<"Coifficient and exponent: ";
+        cin>>coff>>expo;
+        if(head==NULL)
+        {
+            head=new node(coff,expo);
+            tail=head;
+        }
+        else
+        {
+            tail->next=new node(coff,expo);
+            tail=tail->next;
+        }
+    }
+    node *t=head;
+    while(t)
+    {
+        cout<<t->coff<<"x^"<<t->expo<<"+";
+        t=t->next;
+    }
+    int x;
+    cout<<"Enter value of x: ";
+    cin>>x;
+    int sum=0;
+    node *q=head;
+    while(q != NULL){
+        sum += q->coff * pow(x, q->expo);
+        q = q->next;
+    }
+    cout<<"Sum: "<<sum;
+}
