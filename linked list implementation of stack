@@ -1,0 +1,62 @@
+#include <iostream>
+using namespace std;
+class node
+{
+    public:
+    int data;
+    node *next;
+    node(int value)
+    {
+        data=value;
+        next=NULL;
+    }
+};
+struct stack
+{
+    node *top=NULL;
+    void push(int x)
+    {
+        node *temp=new node(x);
+        temp->next=top;
+        top=temp;
+    }
+    int pop()
+    {
+        int topele=top->data;
+        node *temp=top;
+        top=top->next;
+        delete temp;
+        return topele;
+    }
+    int size()
+    {
+        node *temp=top;
+        int count=0;
+        while(temp)
+        {
+            temp=temp->next;
+            count++;
+        }
+        return count;
+    }
+    int topele()
+    {
+        return top->data;
+    }
+};
+int main()
+{
+    int n,ele;
+    stack s;
+    node *head=NULL;
+    node *tail=NULL;
+    s.push(10);
+    s.push(20);
+    s.push(30);
+    cout<<"BEFORE DELETING"<<endl;
+    cout<<"Size of the stack: "<<s.size()<<endl;
+    cout<<"Top of the stack: "<<s.topele()<<endl;
+    cout<<"DELETING ELEMENT"<<s.pop()<<endl;
+    cout<<"Size of the stack: "<<s.size()<<endl;
+    cout<<"top of the stack: "<<s.topele()<<endl;
+}
