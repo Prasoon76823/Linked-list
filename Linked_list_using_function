@@ -1,0 +1,148 @@
+#include <iostream>
+using namespace std;
+
+class node
+{
+    public:
+    int data;
+    node * next;
+    node(int value)
+    {
+        data=value;
+        next=NULL;
+    }
+};
+
+node * addfirst(node *head)
+{
+    int a[]={1,2,3,4};
+    int n=4;
+    for(int i=0;i<n;i++)
+    {
+        if(head==NULL)
+        {
+            head=new node(a[i]);
+        }
+        else
+        {
+            node *temp=new node(a[i]);
+            temp->next=head;
+            head=temp;
+        }
+    }
+    node *t=head;
+    
+    while(t)
+    {
+        cout<<t->data;
+        t=t->next;
+    }
+    return head;
+}
+node *addlast(node *head)
+{
+    int n=4;
+    int a[]={1,2,3,4};
+    node *tail=NULL;
+    for(int i=0;i<n;i++)
+    {
+        if(head==NULL)
+        {
+            head=new node(a[i]);
+            tail=head;
+        }
+        else
+        {
+            node *temp=new node(a[i]);
+            tail->next=temp;
+            tail=temp;
+        }
+    }
+    node *t=head;
+    
+    while(t)
+    {
+        cout<<t->data;
+        t=t->next;
+    }
+    return head;
+}
+node *delfirst(node *head)
+{
+    if(head==NULL)
+    {
+        cout<<"no elements";
+    }
+    else
+    {
+        node *temp=head;
+        head=head->next;
+        delete temp;
+    }
+    node *t=head;
+    
+    while(t)
+    {
+        cout<<t->data;
+        t=t->next;
+    }
+    return head;
+}
+node *dellast(node *head)
+{
+    node *pre=NULL;
+    node *curr=head;
+    if(head==NULL)
+    {
+        cout<<"no elements";
+    }
+    while(curr->next!=NULL)
+    {
+        pre=curr;
+        curr=curr->next;
+    }
+    delete curr;
+    pre->next=NULL;
+    return head;
+}
+// void display(node *head)
+// {
+//     node *t=head;
+    
+//     while(t)
+//     {
+//         cout<<t->data;
+//         t=t->next;
+//     }
+// }
+int main()
+{
+    node *head=NULL;
+    cout<<"1................addfirst"<<endl;
+    cout<<"2................addlast"<<endl;
+    cout<<"3................delfirst"<<endl;
+    cout<<"4................dellast"<<endl;
+    
+    cout<<"5................display"<<endl;
+    cout<<"6................addpos"<<endl;
+    cout<<"7.................delpos"<<endl;
+    int ch;
+    cout<<"Enter your choice:"<<endl;
+    cin>>ch;
+    switch(ch)
+    {
+        case 1:head=addfirst(head);
+        break;
+        case 2:head=addlast(head);
+        break;
+        case 3:head=delfirst(head);
+        break;
+        case 4:head=dellast(head);
+        break;
+        // case 5:
+        // display(head);
+        // break;
+        default: cout<<"Invalid choice";
+    }
+    return 0;
+}
