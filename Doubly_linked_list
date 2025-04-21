@@ -1,0 +1,103 @@
+#include <iostream>
+using namespace std;
+class node
+{
+    public:
+    int data;
+    node *next,*prev;
+    node(int value)
+    {
+        data=value;
+        next=NULL;
+        prev=NULL;
+    }
+};
+node *addfirst(node *head)
+{
+    int n;
+    cout<<"Enter data:";
+    cin>>n;
+    node *temp=new node(n);
+    if(head==NULL)
+    {
+        head=temp;
+    }
+    else
+    {
+        temp->next=head;
+        head->prev=temp;
+        head=temp;
+    }
+    return head;
+}
+node *addlast(node *head)
+{
+    int n;
+    cout<<"Enter data:";
+    cin>>n;
+    node *tail=head;
+    node *temp=new node(n);
+    if(head==NULL)
+    {
+        head=temp;
+    }
+    else
+    {
+        while(tail->next!=NULL)
+        {
+            tail=tail->next;
+        }
+        tail->next=temp;
+        temp->prev=tail;
+        tail=temp;
+    }
+    return head;
+}
+void displayf(node *head)
+{
+    node *t=head;
+    while(t)
+    {
+        cout<<"Data: "<<t->data<<endl;
+        t=t->next;
+    }
+}
+void displayb(node *head)
+{
+    node *t=head;
+    while(t->next!=NULL)
+    {
+        t=t->next;
+    }
+    while(t->prev!=NULL)
+    {
+        cout<<"Data: "<<t->data<<endl;
+        t=t->prev;
+    }
+}
+int main()
+{
+    node *head=NULL;
+    int ch;
+    while(1)
+    {
+        cout<<"1...................addfirst"<<endl;
+        cout<<"1...................addlast"<<endl;
+        cout<<"1...................display forward"<<endl;
+        cout<<"1...................display backward"<<endl;
+        cout<<"Enter your choice: ";
+        cin>>ch;
+        switch(ch)
+        {
+            case 1:head=addfirst(head);
+            break;
+            case 2:head=addlast(head);
+            break;
+            case 3:displayf(head);
+            break;
+            case 4:displayb(head);
+            break;
+            default:cout<<"Invalid choice";
+        }
+    }
+}
