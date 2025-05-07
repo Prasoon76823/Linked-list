@@ -1,0 +1,79 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+class node
+{
+    public:
+    int data;
+    node *next;
+    node(int value)
+    {
+        data=value;
+        next=NULL;
+    }
+};
+node *addfirst(node *head)
+{
+    int n;
+    cout<<"Enter data:";
+    cin>>n;
+    node *p=new node(n);
+    if(head==NULL)
+    {
+        head=p;
+        return head;
+    }
+    else
+    {
+        p->next = head;
+        head = p;
+        return head;
+    }
+}
+node *duplicate(node *head)
+{
+    node *curr=head;
+    while(curr && curr->next)
+    {
+        if(curr->data==curr->next->data)
+        {
+            node *p=curr->next;
+            curr->next=p->next;
+            delete p;
+        }
+        else
+        {
+            curr=curr->next;
+        }
+    }
+    return head;
+}
+void display(node *head)
+{
+    node *t=head;
+    while(t)
+    {
+        cout<<"Data: "<<t->data<<endl;
+        t=t->next;
+    }
+}
+int main()
+{
+    node *head=NULL;
+    int ch;
+    while(1)
+    {
+        cout<<"1..............addfirst"<<endl;
+        cout<<"2..............duplicate"<<endl;
+        cout<<"3..............display"<<endl;
+        cout<<"Enter choice: ";
+        cin>>ch;
+        switch(ch)
+        {
+            case 1:head=addfirst(head);break;
+            case 2:head=duplicate(head);break;
+            case 3:display(head);break;
+            default: cout<<"Invalid choice";
+        }
+    }
+}
