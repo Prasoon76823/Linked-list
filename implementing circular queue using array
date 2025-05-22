@@ -1,0 +1,68 @@
+#include <stdio.h>
+#define size 5
+
+int Q[size];
+int f = -1, r = -1;
+
+void insertion(int value) {
+    if ((r + 1) % size == f) {
+        printf("Queue is Full!!\n");
+        return;
+    }
+
+    if (f == -1) {
+        f = r = 0;
+    } else {
+        r = (r + 1) % size;
+    }
+
+    Q[r] = value;
+    printf("Inserted: %d\n", value);
+}
+
+void deletion() {
+    if (f == -1) {
+        printf("Queue is Empty!!\n");
+        return;
+    }
+
+    printf("Deleting: %d\n", Q[f]);
+    if (f == r) {
+        f = r = -1;
+    } else {
+        f = (f + 1) % size;
+    }
+}
+
+void display() {
+    if (f == -1) {
+        printf("Queue is Empty!\n");
+        return;
+    }
+
+    printf("Queue elements: ");
+    int i = f;
+    while (1) {
+        printf("%d ", Q[i]);
+        if (i == r)
+            break;
+        i = (i + 1) % size;
+    }
+    printf("\n");
+}
+
+int main() {
+    deletion();          
+    insertion(1);
+    insertion(2);
+    insertion(3);
+    deletion();         
+    insertion(4);
+    insertion(5);
+    insertion(6);       
+    insertion(7); 
+    insertion(8);
+    insertion(9);
+    display();          
+    return 0;
+}
