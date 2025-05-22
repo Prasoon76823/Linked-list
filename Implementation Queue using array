@@ -1,0 +1,63 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#define size 5
+int Q[size];
+int f=-1,r=-1;
+void insertion(int value)
+{
+    if(r==size-1)
+    {
+        printf("Full!!");
+    }
+    else
+    {
+        if(f==-1)
+        {
+            f=0;
+        }
+        else
+        {
+            r++;
+            
+            Q[r]=value;
+        }
+    }
+}
+void deletion()
+{
+    if(r==-1 && f==-1)
+    {
+        printf("Empty!!");
+    }
+    else
+    {
+        printf("\nDeleting: %d",Q[f]);
+        if(f==r)
+        {
+            f=r=-1;
+        }
+        else{
+            f++;
+        }
+    }
+}
+void display() {
+    if (f == -1 || f > r) {
+        printf("Queue is Empty!\n");
+    } else {
+        printf("\nQueue: ");
+        for (int i = f; i <= r; i++) {
+            printf("%d ", Q[i]);
+        }
+        printf("\n");
+    }
+}
+int main()
+{
+    deletion();
+    insertion(1);
+    insertion(2);
+    insertion(3);
+    deletion();
+    display();
+}
