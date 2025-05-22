@@ -1,0 +1,70 @@
+#include<iostream>
+using namespace std;
+class node
+{
+    public:
+    int data;
+    node *next;
+    node(int value)
+    {
+        data=value;
+        next=NULL;
+    }
+};
+node *enqueue(node *head,int value)
+{
+    node *t=head;
+    node *p=new node(value);
+    if(head==NULL)
+    {
+        head=p;
+    }
+    else
+    {
+        while(t->next!=NULL)
+        {
+            t=t->next;
+        }
+        t->next=p;
+    }
+    cout<<"Inserted: "<<p->data<<endl;
+    return head;
+}
+node *dequeue(node *head)
+{
+    if(head==NULL)
+    {
+        cout<<"Empty!!"<<endl;
+    }
+    else
+    {
+        node *p=head;
+        head=head->next;
+        cout<<"Deleting: "<<p->data<<endl;
+        delete p;
+    }
+    return head;
+}
+void display(node *head)
+{
+    node *t=head;
+    while(t->next!=NULL)
+    {
+        cout<<"Data: "<<t->data<<endl;
+        t=t->next;
+    }
+}
+int main()
+{
+    node *head=NULL;
+    head=dequeue(head);
+    head=enqueue(head,1);
+    head=enqueue(head,2);
+    head=enqueue(head,3);
+    head=dequeue(head);
+    head=enqueue(head,4);
+    head=enqueue(head,5);
+    head=enqueue(head,6);
+    head=enqueue(head,7);
+    display(head);
+}
