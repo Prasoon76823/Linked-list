@@ -1,0 +1,207 @@
+#include<iostream>
+using namespace std;
+
+class node
+{
+    public:
+    node *next;
+    int data;
+    node(int value)
+    {
+        data=value;
+        next=NULL;
+    }
+};
+
+node *addfirst(node*head)
+{
+    int x;
+    cout<<"Enter data: ";
+    cin>>x;
+    node *p=new node(x);
+    if(head==NULL)
+    {
+        head=p;
+        return head;
+    }
+    else
+    {
+        p->next=head;
+        head=p;
+    }
+    return head;
+}
+
+node *addlast(node *head)
+{
+    int x;
+    cout<<"Enter data: ";
+    cin>>x;
+    node *p=new node(x);
+    if(head==NULL)
+    {
+        head=p;
+        return head;
+    }
+    else
+    {
+        node *temp=head;
+        while(temp->next!=NULL)
+        {
+            temp=temp->next;
+        }
+        temp->next=p;
+        return head;
+    }
+}
+
+node *addpos(node *head)
+{
+    int x,pos;
+    cout<<"Enter data: ";
+    cin>>x;
+    node *p=new node(x);
+    if(head==NULL)
+    {
+        return p;
+    }
+    node *curr=head;
+    cout<<"Enter position: ";
+    cin>>pos;
+    for(int i=1 ; i<=pos-2 && curr!=NULL ; i++)
+    {
+        curr=curr->next;
+    }
+    p->next=curr->next;
+    curr->next=p;
+    return head;
+}
+
+node  *delfirst(node *head)
+{
+    if(head==NULL)
+    {
+        cout<<"Empty!!";
+    }
+    else
+    {
+        node *t=head;
+        head=head->next;
+        cout<<"Deleting: "<<t->data<<endl;
+        delete t;
+    }
+    return head;
+}
+
+node *dellast(node *head)
+{
+    if(head==NULL)
+    {
+        cout<<"Empty!!";
+    }
+    else
+    {
+        node *t=head;
+        while(t->next->next!=NULL)
+        {
+            t=t->next;
+        }
+        node *p=t->next;
+        cout<<"Deleting: "<<p->data<<endl;
+        delete p;
+        t->next=NULL;
+    }
+    return head;
+}
+
+node *delpos(node*head)
+{
+    node *curr=head;
+    int pos;
+    cout<<"Enter position: ";
+    cin>>pos;
+    if(head==NULL)
+    {
+        cout<<"Empty!!";
+    }
+    else
+    {
+        for(int i=1 ; i<=pos-2 && curr!=NULL ; i++)
+        {
+            curr=curr->next;
+        }
+        node *p=curr->next;
+        cout<<"Deleting: "<<p->data<<endl;
+        delete p;
+    }
+    return head;
+}
+
+void display(node *head)
+{
+    node *temp=head;
+    while(temp)
+    {
+        cout<<"Data: "<<temp->data<<endl;
+        temp=temp->next;
+    }
+}
+int main()
+{
+    node *head=NULL;
+    int ch;
+    while(1)
+    {
+        cout<<"1..................Add first"<<endl;
+        cout<<"2..................Add last"<<endl;
+        cout<<"3..................Add position"<<endl;
+        cout<<"4..................Display"<<endl;
+        cout<<"5..................Del first"<<endl;
+        cout<<"6..................Del last"<<endl;
+        cout<<"7..................Del position"<<endl;
+        cout<<"Enter your choice: ";
+        cin>>ch;
+        switch(ch)
+        {
+            case 1:
+            {
+                head=addfirst(head);
+                break;
+            }
+            case 2:
+            {
+                head=addlast(head);
+                break;
+            }
+            case 3:
+            {
+                head=addpos(head);
+                break;
+            }
+            case 4:
+            {
+                display(head);
+                break;
+            }
+            case 5:
+            {
+                head=delfirst(head);
+                break;
+            }
+            case 6:
+            {
+                head=dellast(head);
+                break;
+            }
+            case 7:
+            {
+                head=delpos(head);
+                break;
+            }
+            default:
+            { 
+                cout<<"Invalid choice ";
+            }
+        }
+    }
+}
